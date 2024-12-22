@@ -1,0 +1,21 @@
+{
+  "name": "hive-mind",
+  "version": "1.0.0",
+  "description": "Hive Mind for all your resources",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev":"nodemon dist/index.js"
+  },
+  "author": "Faizan Raza",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.9",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@types/express": "^5.0.0",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.2"
+  }
+}
