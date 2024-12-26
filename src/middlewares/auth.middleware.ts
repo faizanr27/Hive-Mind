@@ -1,18 +1,33 @@
-const jwt = require('jsonwebtoken');
+import { NextFunction, Request, Response } from "express";
+import jwt, { JwtPayload } from "jsonwebtoken";
+require('dotenv').config()
 
-const verifyToken = (req:any, res:any, next:any) => {
-  const token = req.headers['authorization'];
-  if (!token) {
-    return res.status(401).json({ message: 'Token is required' });
+
+declare global {
+  namespace Express {
+      interface Request {
+          userId?: string;
+      }
   }
+}
 
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET_key);
-    req.userId = decoded.userId;
-    next();
-  } catch (error) {
-    return res.status(401).json({ message: 'Token is invalid' });
-  }
-};
+const SECRET = process.env.JWT_SECRET as string;
 
-export default verifyToken;
+export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+    const header = req.headers["authorization"];
+    const decoded = jwt.verify(header as string, SECRET)
+    if (decoded) {
+        if (typeof decoded === "string") {
+            res.status(403).json({
+                message: "You are not logged in"
+            })
+            return;    
+        }
+        req.userId = (decoded as JwtPayload).userId;
+        next()
+    } else {
+        res.status(403).json({
+            message: "You are not logged in"
+        })
+    }
+}
