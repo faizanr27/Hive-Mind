@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/(.*)", // Matches all routes
+      "source": "/(.*)",
       "headers": [
         { "key": "Access-Control-Allow-Origin", "value": "https://hivee-mind.vercel.app" },
         { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, DELETE, OPTIONS" },
