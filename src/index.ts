@@ -9,7 +9,13 @@ const cors = require('cors')
 const app = express()
 const PORT = process.env.PORT || 4000
 
-app.use(cors({origin: "https://hivee-mind.vercel.app/"}));
+
+app.use(cors({
+  origin: "https://hivee-mind.vercel.app",
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
 app.use(express.json())
 
 
