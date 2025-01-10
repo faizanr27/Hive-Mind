@@ -9,7 +9,7 @@ const app = express()
 const PORT = process.env.PORT || 4000
 
 const corsOptions = {
-  origin: "https://hivee-mind.vercel.app",
+  origin: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: [
     'Content-Type',
