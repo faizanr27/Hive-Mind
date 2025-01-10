@@ -31,7 +31,7 @@ app.options('*', cors(corsOptions));
 
 // Additional headers middleware
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Origin', 'https://hivee-mind.vercel.app');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header(
