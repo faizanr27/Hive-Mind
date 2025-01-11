@@ -24,6 +24,16 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  if (req.method === 'OPTIONS') {
+    return res.status(200).json({
+      body: "OK"
+    });
+  }
+  next();
+});
+
+
 app.use(express.json())
 connectDB()
 app.use('/', authRoutes)
