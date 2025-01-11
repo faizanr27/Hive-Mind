@@ -1,16 +1,15 @@
-import express from 'express'
+import express, { Request, Response, NextFunction } from 'express';
 require('dotenv').config()
 import connectDB from './db/db'
 import authRoutes from './routes/auth.routes'
 import contentRoutes from './routes/content.routes'
 import shareRoutes from './routes/share.routes'
 const cors = require('cors')
-
 const app = express()
 const PORT = process.env.PORT || 4000
-app.use(express.json())
 
 const corsOptions = {
+
     origin: ['https://hivee-mind.vercel.app','http://localhost:5173'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  
@@ -25,10 +24,23 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
     res.status(500).json({ error: 'Something went wrong!' });
 });
 
+
+app.use(cors(corsOptions));
+app.use((req: Request, res: Response, next:  NextFunction): any => {
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+  else{
+    next();
+  }
+});
+
+
+app.use(express.json())
 connectDB()
-app.use('/', authRoutes)
-app.use('/', contentRoutes)
-app.use('/', shareRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api', contentRoutes)
+app.use('/api', shareRoutes)
 
 app.listen(PORT, ()=>{
     console.log(`server running on port ${PORT}`)
