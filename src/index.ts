@@ -24,7 +24,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next:  NextFunction) => {
   if (req.method === 'OPTIONS') {
     return res.status(200).json({
       body: "OK"
