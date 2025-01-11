@@ -18,22 +18,6 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Add this before your routes in index.ts
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Something went wrong!' });
-});
-
-
-app.use(cors(corsOptions));
-app.use((req: Request, res: Response, next:  NextFunction): any => {
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-  else{
-    next();
-  }
-});
 
 
 app.use(express.json())
