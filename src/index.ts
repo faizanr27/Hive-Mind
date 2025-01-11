@@ -36,9 +36,9 @@ app.use((req: Request, res: Response, next:  NextFunction): any => {
 
 app.use(express.json())
 connectDB()
-app.use('/', authRoutes)
-app.use('/', contentRoutes)
-app.use('/', shareRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api', contentRoutes)
+app.use('/api', shareRoutes)
 
 app.listen(PORT, ()=>{
     console.log(`server running on port ${PORT}`)
