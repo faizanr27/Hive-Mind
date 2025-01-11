@@ -30,7 +30,9 @@ app.use((req: Request, res: Response, next:  NextFunction) => {
       body: "OK"
     });
   }
-  next();
+  else{
+    next();
+  }
 });
 
 
