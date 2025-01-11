@@ -1,4 +1,5 @@
 import express from 'express'
+import { NextFunction, Request, Response } from "express";
 require('dotenv').config()
 import connectDB from './db/db'
 import authRoutes from './routes/auth.routes'
