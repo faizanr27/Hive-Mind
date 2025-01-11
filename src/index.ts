@@ -38,7 +38,7 @@ app.use((req: Request, res: Response, next:  NextFunction): any => {
 
 app.use(express.json())
 connectDB()
-app.use('/api/auth', authRoutes)
+app.use('/api', authRoutes)
 app.use('/api', contentRoutes)
 app.use('/api', shareRoutes)
 
