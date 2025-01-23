@@ -8,26 +8,34 @@ exports.createContent = async (req: Request, res:Response) => {
         link,
         type,
         title: req.body.title,
-        userId: req.userId,
+        userId: res.locals.jwtData,
         tags: []
     })
 
     res.json({
         message: "Content added"
     })
-    
+
 }
 
 
 exports.getContent = async (req: Request, res:Response) => {
 
-    const userId = req.userId;
-    const userContent = await content.find({
-        userId: userId
-    }).populate("userId", "username")
-    res.json({
-        userContent
-    })
+    try {
+        const userContent = await content.find({ userId: res.locals.jwtData }).populate("userId", "name");
+
+        res.status(200).json({
+          success: true,
+          userContent,
+        });
+      } catch (error: any) {
+        console.error(`Error fetching content: ${error.message}`);
+        res.status(500).json({
+          success: false,
+          message: "Failed to fetch content.",
+          error: error.message,
+        });
+      }
 }
 
 exports.deleteContent = async (req: Request, res:Response) => {
