@@ -221,7 +221,7 @@ exports.githubCallback = [
     req : Request,
     res : Response,
     next : NextFunction
-): Promise<any>=>{
+) =>{
     try {
         res.clearCookie(COOKIE_NAME);
         return res.status(200).json({
