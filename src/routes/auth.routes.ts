@@ -20,6 +20,6 @@ router.get(
     passport.authenticate('github')
   );
 router.get('/github/callback', controller.githubCallback)
-// router.use(verifyToken)
+
 router.get('/status', verifyToken, controller.verifyUser)
 export default router

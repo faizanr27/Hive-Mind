@@ -223,7 +223,10 @@ exports.githubCallback = [
     next : NextFunction
 ) =>{
     try {
+      const oldToken = req.signedCookies[`${COOKIE_NAME}`];
+      if (oldToken) {
         res.clearCookie(COOKIE_NAME);
+      }
         return res.status(200).json({
             message : "User successfully logged out."
         });
