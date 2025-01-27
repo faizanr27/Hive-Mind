@@ -110,7 +110,7 @@ exports.verifyUser = async (
           })
       }
 
-      if(existingUser._id != res.locals.jwtData){
+      if(existingUser._id?.toString() != res.locals.jwtData){
           return res.status(401).send("Permissions did not match.");
       }
 
