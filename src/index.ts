@@ -7,6 +7,7 @@ import shareRoutes from './routes/share.routes'
 import cookieParser from "cookie-parser";
 import passport from 'passport'
 import session from 'express-session';
+import MongoStore from 'connect-mongo';
 const cors = require('cors')
 const app = express()
 
@@ -27,6 +28,10 @@ app.use(
         secret: process.env.SESSION_SECRET!,
         resave: false,
         saveUninitialized: false,
+        store: MongoStore.create({
+            mongoUrl: process.env.URI!,
+            ttl: 14 * 24 * 60 * 60
+        })
     })
 );
 app.use(passport.initialize())

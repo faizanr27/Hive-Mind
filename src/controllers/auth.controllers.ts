@@ -38,9 +38,25 @@ exports.signup =  async (req: Request, res: Response) => {
             SECRET,
             {expiresIn: '30d'})
 
-            res.status(200).json({
-                token
-            })
+            const oldToken = req.signedCookies[`${COOKIE_NAME}`];
+            if (oldToken) {
+                res.clearCookie(`${COOKIE_NAME}`);
+            }
+
+            const expiresInMilliseconds = 7 * 24 * 60 * 60 * 1000;
+            const expires = new Date(Date.now() + expiresInMilliseconds);
+            console.log("reached here 1")
+            res.cookie(`${COOKIE_NAME}`, token, {
+              domain: isProduction ? "hive-mind.up.railway.app" : undefined, // Production Mode
+              expires,
+              httpOnly: true,
+              signed: true,
+              secure: isProduction,
+              sameSite : isProduction ? "none" : "lax"
+          });
+          console.log("reached here 2")
+
+          res.status(200).json({message:`${user.name} has been successfully registered.`,id:user._id})
     } catch (error) {
         console.log(error)
     }
@@ -66,13 +82,13 @@ exports.login = async (req: Request, res: Response) => {
 
         const oldToken = req.signedCookies[`${COOKIE_NAME}`];
         if (oldToken) {
-            res.clearCookie(COOKIE_NAME);
+            res.clearCookie(`${COOKIE_NAME}`);
         }
 
         const expiresInMilliseconds = 7 * 24 * 60 * 60 * 1000;
         const expires = new Date(Date.now() + expiresInMilliseconds);
         console.log("reached here 1")
-        res.cookie(COOKIE_NAME, token, {
+        res.cookie(`${COOKIE_NAME}`, token, {
           domain: isProduction ? "hive-mind.up.railway.app" : undefined, // Production Mode
           expires,
           httpOnly: true,
@@ -148,14 +164,14 @@ exports.googleCallback = [
       // Clear old token if it exists
       const oldToken = req.signedCookies[`${COOKIE_NAME}`];
       if (oldToken) {
-        res.clearCookie(COOKIE_NAME);
+        res.clearCookie(`${COOKIE_NAME}`);
       }
 
       // Set cookie expiration and cookie itself
       const expiresInMilliseconds = 7 * 24 * 60 * 60 * 1000; // 7 days
       const expires = new Date(Date.now() + expiresInMilliseconds);
 
-      res.cookie(COOKIE_NAME, token, {
+      res.cookie(`${COOKIE_NAME}`, token, {
         domain: isProduction ? "hive-mind.up.railway.app" : undefined,
         expires,
         httpOnly: true,
@@ -191,14 +207,14 @@ exports.githubCallback = [
       // Clear old token if it exists
       const oldToken = req.signedCookies[`${COOKIE_NAME}`];
       if (oldToken) {
-        res.clearCookie(COOKIE_NAME);
+        res.clearCookie(`${COOKIE_NAME}`);
       }
 
       // Set cookie expiration and cookie itself
       const expiresInMilliseconds = 7 * 24 * 60 * 60 * 1000; // 7 days
       const expires = new Date(Date.now() + expiresInMilliseconds);
 
-      res.cookie(COOKIE_NAME, token, {
+      res.cookie(`${COOKIE_NAME}`, token, {
         domain: isProduction ? "hive-mind.up.railway.app" : undefined,
         expires,
         httpOnly: true,
@@ -225,7 +241,13 @@ exports.githubCallback = [
     try {
       const oldToken = req.signedCookies[`${COOKIE_NAME}`];
       if (oldToken) {
-        res.clearCookie(COOKIE_NAME);
+        res.clearCookie(`${COOKIE_NAME}`,{
+          domain: isProduction ? "hive-mind.up.railway.app" : undefined,
+          httpOnly: true,
+          signed: true,
+          secure: isProduction,
+          sameSite : isProduction ? "none" : "lax"
+        });
       }
         return res.status(200).json({
             message : "User successfully logged out."
