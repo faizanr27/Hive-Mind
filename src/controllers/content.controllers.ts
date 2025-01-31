@@ -7,7 +7,7 @@ exports.createContent = async (req: Request, res:Response) => {
     await content.create({
         link,
         type,
-        title: req.body.title,
+        // title: req.body.title,
         userId: res.locals.jwtData,
         tags: []
     })
