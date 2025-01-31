@@ -3,9 +3,12 @@ import mongoose from 'mongoose';
 const contentSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true,
+    required: false,
   },
-  link: String,
+  link: {
+    type: String,
+    required: false,
+  },
   tags: [{type: mongoose.Types.ObjectId, ref: 'Tag'}],
   type: String,
   userId: {type: mongoose.Types.ObjectId, ref: 'User', required: true },
