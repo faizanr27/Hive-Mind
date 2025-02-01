@@ -57,9 +57,9 @@ exports.signup =  async (req: Request, res: Response) => {
           console.log("reached here 2")
 
           res.status(200).json({message:`${user.name} has been successfully registered.`,id:user._id})
-    } catch (error) {
-        console.log(error)
-    }
+    } catch (error:any) {
+      console.log({message:`${error.message}`})
+  }
 }
 
 exports.login = async (req: Request, res: Response) => {
