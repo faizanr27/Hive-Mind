@@ -56,7 +56,7 @@ exports.signup =  async (req: Request, res: Response) => {
           });
           console.log("reached here 2")
 
-          res.status(200).json({message:`${user.name} has been successfully registered.`,id:user._id})
+          res.status(200).json({message:`${user.name} has been successfully registered.`,id:user._id, name : user.name})
     } catch (error: any) {
       console.log({ message: `${error.message}` });
       res.status(500).json({ error: `Internal Server Error: ${error.message}` });
@@ -100,7 +100,7 @@ exports.login = async (req: Request, res: Response) => {
       });
       console.log("reached here 2")
 
-      res.status(200).json({message:`${user.name} has been successfully logged in.`,id:user._id})
+      res.status(200).json({message:`${user.name} has been successfully logged in.`,id:user._id, name : user.name})
         // res.status(200).json({
         //     token
         // })
