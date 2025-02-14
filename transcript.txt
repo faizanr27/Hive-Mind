@@ -1,0 +1,161 @@
+Title: My Story - How I learnt to code, sold my project and moved to USA
+
+Description: I gave this little talk at the GCSP story slam at ASU.
+
+Transcript:
+hi I'm D and I'm a freshman studying at
+ASU this is my second semester and I'm
+going to tell you about how I sold my
+company in high
+school so it's the middle of pandemic
+2021 I'm sitting in a cal dark room in
+Mumbai India with no idea what I'm doing
+with my life I was depressed anxious
+because I was giving one of the most
+competitive exams of the world which is
+J and basically I was just wasting my
+time playing games all day because
+studies is too difficult
+right and I was something called an iPad
+kid like you know the kind of person who
+like plays games watches YouTube videos
+all their childhood and ends up being
+very useless in
+life that's how I felt I mean I knew
+that I knew I'm very useless I knew I
+have to turn I have to fix myself and I
+had this like liking for technology from
+a very young age because of I me having
+that iPad and me playing so many games I
+thought to myself why am I still a
+consumer why I how how do the these
+people even make these games like this
+is amazing right uh how do they make
+these apps how how how is YouTube made
+and one day while I was playing y City
+on my like phone which yeah I used to
+Pirate games on my phone and play it um
+I was like okay it's time to get a new
+laptop and it's time to like make a game
+like this which was like a okay imagine
+a normal person who knows nothing about
+programming waned to make a game like wi
+City that's impossible right I convinced
+my parents that I like I'll to get me a
+laptop on my birthday in August 2021 and
+it was a rather expensive laptop for
+someone as useless useless as me at the
+time and being in a middle class family
+in Mumbai like of course my parents were
+like hesitant at first but because I was
+their favorite child
+they got me
+one um so I utilized uh like my time so
+the first thing I did after getting that
+laptop extremely inspired to like turn
+my life around I open the laptop and I
+download
+Minecraft game the second thing I did
+however was open YouTube and search what
+the best programming language to learn
+as a beginner and I see okay it's python
+then how python Co for beginners and I
+see this one guy with an Indian guy on
+YouTube having like a 16-hour long
+course there's no way I'm doing a
+16-hour long course and then like I sit
+down like put my laptop aside I sit down
+look out of the window and I see I say
+yes way I can do a 16-hour long course
+and that's exactly what I did I sat
+through that entire 16-hour long course
+in one go with nothing but an up in
+between because I'm a human and next
+morning my parents were so concerned
+about me that for the first time my mom
+was like beta let's have tea together
+together and um we like yeah next
+morning we sat down we had tea together
+I was telling Mom everything I learned
+why I'm doing it uh and how I'm
+utilizing the uh the extreme amounts of
+money I just spent on the laptop um but
+my mom was like very happy with it and
+she told me about this one problem she
+has in her business that she has to keep
+doing one particular calculation again
+and again and again and again and to fix
+that I'm in a very small simple python
+application that saves our time and like
+my mom was so happy and I was so happy
+that I kept finding problems in in real
+life even if like I had to save like 5
+Seconds every day I I spent four hour
+solving that problem with code and
+automating it but yeah I made a lot of
+products projects for myself and for
+others now that's a different question
+that all the projects that I made for
+others were not used by anyone but um
+yeah I I made a all of projects like a
+lot like at least like 20 25 projects
+that I would use in my daily life like a
+Dictionary tool um like file auto file
+organizer stuff like that and one day I
+create like on a random Sunday afternoon
+I sit down and I make this uh Twitter
+bot and all that Twitter bot did it was
+like one of my simplest projects all it
+did was like take a photo of that tweet
+and send it back to the user like
+convert tweet into an image
+and maybe like uh make it even more
+beautiful or
+whatever so I spent an entire day making
+it and I slept with like no expectation
+for anyone to use it next morning I wake
+up there's 100 people using it and I was
+like damn this is good so I started uh
+talking more about it online and then uh
+so enough like after a week there was
+there was a thousand people using it and
+like 100 followers on that bot and
+slowly slowly like
+that it got th000 followers then 2,000
+then 3,000 4,000 10,000 20,000 40,000
+and like soon enough it had like 70,000
+followers and 5 million users a month
+which was like crazy right like I had to
+do something about this I monetized the
+bot I raised funding I uh it was just a
+Twitter bot so I got a co-founder who
+would help me with uh making an actual
+app for social media users to like do
+all that because apparently that was a
+very big issue and we solved that issue
+and we made an amazing app and as soon
+as I was going to launch it Twitter
+announce that they're going to monetize
+their API and in order to keep it online
+I would have
+to pay them $43,000 a month I was
+devastated and I decided to sell off the
+project which was good because then I
+could convince my parents that hey I do
+not have to do this je thing I can give
+up and I can finally go to us for
+studies
+now and that's what I did um so yeah I
+guess the takeaway from this is to
+follow your passion honestly even if
+like no one is caring about that no one
+like no one will even pay attention to
+you initially but slowly you'll get
+lucky and lucky and someday something
+like this might just happen to you and
+that's exact passion is the reason why
+I'm telling my story to you guys and
+like in USA and not sitting in that cold
+dark room playing games in Mumbai
+[Applause]
+India

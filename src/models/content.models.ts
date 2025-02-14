@@ -11,6 +11,8 @@ const contentSchema = new mongoose.Schema({
   },
   tags: [{type: mongoose.Types.ObjectId, ref: 'Tag'}],
   type: String,
+  embeddings:{type:[Number],required:true},
+  content: {type: String, required:true },
   userId: {type: mongoose.Types.ObjectId, ref: 'User', required: true },
 });
 

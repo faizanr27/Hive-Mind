@@ -1,5 +1,4 @@
 import express, { Request, Response, NextFunction } from 'express';
-require('dotenv').config()
 import connectDB from './db/db'
 import authRoutes from './routes/auth.routes'
 import contentRoutes from './routes/content.routes'
@@ -8,22 +7,23 @@ import cookieParser from "cookie-parser";
 import passport from 'passport'
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
-const cors = require('cors')
+import 'dotenv/config';
+import cors from 'cors';
 const app = express()
 
 const PORT = process.env.PORT || 4000;
 
 
-const corsOptions = {
+// const corsOptions = {
 
-    origin: ['https://hivee-mind.vercel.app','http://localhost:5173'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: true
+//     origin: ['https://hivee-mind.vercel.app','http://localhost:5173'],
+//     allowedHeaders: ['Content-Type', 'Authorization'],
+//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+//     credentials: true
 
-};
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(
     session({
         secret: process.env.SESSION_SECRET!,

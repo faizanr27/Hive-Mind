@@ -1,10 +1,17 @@
-import express from 'express'
+import express,{ Request, Response, NextFunction } from 'express'
 import {verifyToken} from '../middlewares/auth.middleware';
 const router = express.Router();
-const controller = require('../controllers/content.controllers')
+import { getContent, createContent, queryEmbeddings, deleteContent } from '../controllers/content.controllers';
 
-router.get('/Content', verifyToken, controller.getContent)
-router.post('/Content', verifyToken, controller.createContent)
-router.delete('/Content', verifyToken, controller.deleteContent)
+const asyncHandler = <T>(fn: (req: Request, res: Response, next: NextFunction) => Promise<T>) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    fn(req, res, next).then(() => next()).catch(next);
+  };
+};
 
-export default router
+router.get('/Content', verifyToken, asyncHandler(getContent));
+router.post('/Content/generate', verifyToken, asyncHandler(createContent));
+router.post('/Content/retrieve', verifyToken, asyncHandler(queryEmbeddings));
+router.delete('/Content', verifyToken, asyncHandler(deleteContent));
+
+export default router;
