@@ -1,3 +1,7 @@
 node_modules
 dist
 .env
+Tweet.txt
+webpage.txt
+output.html
+transcript.txt

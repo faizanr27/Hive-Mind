@@ -12,7 +12,7 @@ function detectUrlType(url:string):string {
   if (url.includes("youtube.com") || url.includes("youtu.be")) {
       return "youtube";
   } else if (url.includes("twitter.com") || url.includes("x.com")) {
-      return "tweet";
+      return "twitter";
   } else {
       return "website";
   }
