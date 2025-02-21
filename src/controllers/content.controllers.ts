@@ -18,6 +18,7 @@ function detectUrlType(url:string):string {
   }
 }
 
+
 function averagePooling(embeddings: number[][]): number[] {
     const numChunks = embeddings.length;
     const embeddingSize = embeddings[0].length;
