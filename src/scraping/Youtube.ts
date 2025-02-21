@@ -20,16 +20,7 @@ async function giveYoutubeInfo(link: string): Promise<YoutubeInfo> {
     const page = await browser.newPage();
 
     try {
-        
-        
-
-        await page.setExtraHTTPHeaders({
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
-            'Accept-Language': 'en-US,en;q=0.5'
-        });
-        
-
-        await page.goto(link, { waitUntil: "networkidle0", timeout: 50000 });
+        await page.goto(link, { waitUntil: "domcontentloaded" });
         console.log("Page loaded");
         await new Promise(resolve => setTimeout(resolve, 2000));
 
