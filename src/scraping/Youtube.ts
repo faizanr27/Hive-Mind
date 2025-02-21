@@ -13,7 +13,7 @@ interface YoutubeInfo {
 
 async function giveYoutubeInfo(link: string): Promise<YoutubeInfo> {
     const browser = await puppeteer.launch({
-        headless: false, // Set to false for debugging
+        headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
 
@@ -24,54 +24,75 @@ async function giveYoutubeInfo(link: string): Promise<YoutubeInfo> {
         await page.goto(link, { waitUntil: "networkidle2" });
         console.log("Page loaded");
 
-        await page.screenshot({ path: 'page-loaded.png' }); // Debug screenshot
+        await page.screenshot({ path: 'page-loaded.png' });
 
-        // Extract title
+        // ✅ Get the title properly
         let title = await page.evaluate(() => {
             return document.querySelector("#title > h1")?.textContent?.trim() || "N/A";
         });
+
         console.log("Video Title:", title);
 
-        // Click "Show More" button
+        // ✅ Click the "Show More" button if available
         try {
             await page.waitForSelector("#bottom-row", { timeout: 5000 });
+            console.log("Found Show More button");
+
             await page.click("#bottom-row > #description");
             console.log("Clicked Show More");
+
+            await page.waitForSelector("#description-inner", { timeout: 5000 });
         } catch (error) {
             console.warn("Show More button not found or not clickable:", error);
         }
 
-        // Extract description
+
+        // ✅ Extract video description
         let description = await page.evaluate(() => {
             return document.querySelector("#description-inline-expander > yt-attributed-string > span > span:nth-child(1)")?.textContent?.trim() || "N/A";
         });
+
+        if (description === "N/A") {
+            description = await page.evaluate(() => {
+              const metaTag = document.querySelector("meta[name='description']") as HTMLMetaElement || "N/A";
+              return metaTag?.content || "N/A";
+            });
+        }
+
         console.log("Video Description:", description);
 
-        // Click transcript button
+        // ✅ Click the transcript button
         try {
             await page.waitForSelector('#primary-button', { timeout: 5000 });
+            console.log("Found Transcript Button");
             await page.evaluate(() => window.scrollBy(0, 500));
             await page.evaluate(() => {
                 (document.querySelector('#primary-button > ytd-button-renderer > yt-button-shape > button') as HTMLButtonElement)?.click();
             });
+
             await page.waitForSelector('#segments-container', { timeout: 5000 });
         } catch (error) {
             console.warn("Transcript button not found or not clickable:", error);
         }
 
-        // Extract transcript
+
+        // ✅ Extract transcript segments
         let content = await page.$$eval(
             '#segments-container > ytd-transcript-segment-renderer',
             elements => elements.map(el => {
-                return el.querySelector('div > yt-formatted-string')?.textContent?.trim() || "N/A";
+                let text = el.querySelector('div > yt-formatted-string')?.textContent?.trim() || "N/A";
+                return  text ;
             })
         );
+
 
         console.log(content.join("\n"));
 
         const finalText = `Title: ${title}\n\nDescription: ${description}\n\nTranscript:\n${content.join("\n")}`;
-        await fs.writeFile('transcript.txt', finalText, 'utf-8');
-        console.log("Transcript saved successfully.");
+        // await fs.writeFile('transcript.txt', finalText, 'utf-8');
+        console.log("Transcript extracted successfully. :", finalText);
+
+        // await new Promise(resolve => setTimeout(resolve, 2000));
 
         await browser.close();
 
