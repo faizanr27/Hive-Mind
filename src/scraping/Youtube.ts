@@ -1,6 +1,5 @@
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
-import fs from 'fs/promises';
 
 puppeteer.use(StealthPlugin());
 
@@ -21,7 +20,7 @@ async function giveYoutubeInfo(link: string): Promise<YoutubeInfo> {
 
     try {
         console.log("Navigating to the page...");
-        await page.goto(link, { waitUntil: "networkidle2" });
+        await page.goto(link, { waitUntil: "networkidle2", timeout: 60000 });
         console.log("Page loaded");
 
         await page.screenshot({ path: 'page-loaded.png' });
@@ -46,7 +45,8 @@ async function giveYoutubeInfo(link: string): Promise<YoutubeInfo> {
             console.warn("Show More button not found or not clickable:", error);
         }
 
-
+        await new Promise(resolve => setTimeout(resolve, 2000));
+        
         // ✅ Extract video description
         let description = await page.evaluate(() => {
             return document.querySelector("#description-inline-expander > yt-attributed-string > span > span:nth-child(1)")?.textContent?.trim() || "N/A";
@@ -60,6 +60,7 @@ async function giveYoutubeInfo(link: string): Promise<YoutubeInfo> {
         }
 
         console.log("Video Description:", description);
+        await new Promise(resolve => setTimeout(resolve, 2000));
 
         // ✅ Click the transcript button
         try {
@@ -75,6 +76,7 @@ async function giveYoutubeInfo(link: string): Promise<YoutubeInfo> {
             console.warn("Transcript button not found or not clickable:", error);
         }
 
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
         // ✅ Extract transcript segments
         let content = await page.$$eval(
@@ -89,10 +91,7 @@ async function giveYoutubeInfo(link: string): Promise<YoutubeInfo> {
         console.log(content.join("\n"));
 
         const finalText = `Title: ${title}\n\nDescription: ${description}\n\nTranscript:\n${content.join("\n")}`;
-        // await fs.writeFile('transcript.txt', finalText, 'utf-8');
         console.log("Transcript extracted successfully. :", finalText);
-
-        // await new Promise(resolve => setTimeout(resolve, 2000));
 
         await browser.close();
 
