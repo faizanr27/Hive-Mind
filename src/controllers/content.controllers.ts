@@ -6,6 +6,7 @@ import giveYoutubeInfo from "../scraping/Youtube";
 import { createEmbeddings, createQueryEmbeddings, model1 } from "../utils/embeds";
 import { cosineSimilarity } from "../utils/embeds";
 import { chunkText } from "../utils/chunk";
+import axios from "axios";
 
 
 function detectUrlType(url:string):string {
@@ -18,6 +19,7 @@ function detectUrlType(url:string):string {
   }
 }
 
+//https://mwn9p70n-5000.inc1.devtunnels.ms/
 
 function averagePooling(embeddings: number[][]): number[] {
     const numChunks = embeddings.length;
@@ -59,11 +61,18 @@ export async function createContent(req: Request, res: Response){
               contentText = `${result.description || ""} by ${result.creatorName || ""}`;
               break;
           default:
-              result = await giveWebsiteInfo(link);
-              if ('result1' in result) console.log(result?.result1)
-              if('result1' in result) {
-                contentText = `${result.result1.title || ""} ${result.result1.body || ""}`;
-            }
+                const requestBody = { url: link };
+                const response = await axios.post(
+                "https://mwn9p70n-5000.inc1.devtunnels.ms/process-url",
+                requestBody,
+                { headers: { "Content-Type": "application/json" } }
+                );
+                // console.log("API Response:", response);
+                result = response.data; // Extract response data
+                console.log("API Response:", result.result);
+                if (result) {
+                   contentText = `${result?.result?.title || ""}\n\n${result?.result?.markdown || ""}`;
+                  }
       }
       console.log(contentText)
 
@@ -79,11 +88,13 @@ export async function createContent(req: Request, res: Response){
       const aggregatedEmbedding = averagePooling(embeddings);
 
       console.log(aggregatedEmbedding)
+      console.log("Content Text:", contentText);
 
       // Save content to MongoDB
       await content.create({
           link,
           type,
+          title: result.result.title || "",
           content: contentText,
           embeddings: aggregatedEmbedding,
           userId: res.locals.jwtData,
