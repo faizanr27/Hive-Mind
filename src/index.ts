@@ -9,9 +9,12 @@ import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import 'dotenv/config';
 import cors from 'cors';
+import os from "os"
 const app = express()
 
 const PORT = process.env.PORT || 4000;
+const numCPUs = os.cpus().length;
+console.log(numCPUs)
 
 
 const corsOptions = {
