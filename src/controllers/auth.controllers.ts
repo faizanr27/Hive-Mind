@@ -47,7 +47,7 @@ exports.signup =  async (req: Request, res: Response) => {
             const expires = new Date(Date.now() + expiresInMilliseconds);
             console.log("reached here 1")
             res.cookie(`${COOKIE_NAME}`, token, {
-              domain: isProduction ? "hive-mind.up.railway.app" : undefined, // Production Mode
+              domain: isProduction ? "hive.shortsy.xyz" : undefined, // Production Mode
               expires,
               httpOnly: true,
               signed: true,
@@ -91,7 +91,7 @@ exports.login = async (req: Request, res: Response) => {
         const expires = new Date(Date.now() + expiresInMilliseconds);
         console.log("reached here 1")
         res.cookie(`${COOKIE_NAME}`, token, {
-          domain: isProduction ? "hive-mind.up.railway.app" : undefined, // Production Mode
+          domain: isProduction ? "hive.shortsy.xyz" : undefined, // Production Mode
           expires,
           httpOnly: true,
           signed: true,
@@ -174,7 +174,7 @@ exports.googleCallback = [
       const expires = new Date(Date.now() + expiresInMilliseconds);
 
       res.cookie(`${COOKIE_NAME}`, token, {
-        domain: isProduction ? "hive-mind.up.railway.app" : undefined,
+        domain: isProduction ? "hive.shortsy.xyz" : undefined,
         expires,
         httpOnly: true,
         signed: true,
@@ -217,7 +217,7 @@ exports.githubCallback = [
       const expires = new Date(Date.now() + expiresInMilliseconds);
 
       res.cookie(`${COOKIE_NAME}`, token, {
-        domain: isProduction ? "hive-mind.up.railway.app" : undefined,
+        domain: isProduction ? "hive.shortsy.xyz" : undefined,
         expires,
         httpOnly: true,
         signed: true,
@@ -244,7 +244,7 @@ exports.githubCallback = [
       const oldToken = req.signedCookies[`${COOKIE_NAME}`];
       if (oldToken) {
         res.clearCookie(`${COOKIE_NAME}`,{
-          domain: isProduction ? "hive-mind.up.railway.app" : undefined,
+          domain: isProduction ? "hive.shortsy.xyz" : undefined,
           httpOnly: true,
           signed: true,
           secure: isProduction,
