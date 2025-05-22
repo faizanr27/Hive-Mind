@@ -23,7 +23,7 @@ async function giveYoutubeInfo(link: string): Promise<YoutubeInfo> {
         await page.goto(link, { waitUntil: "networkidle2", timeout: 60000 });
         console.log("Page loaded");
 
-        await page.screenshot({ path: 'page-loaded.png' });
+        // await page.screenshot({ path: 'page-loaded.png' });
 
         // ✅ Get the title properly
         let title = await page.evaluate(() => {
@@ -46,7 +46,7 @@ async function giveYoutubeInfo(link: string): Promise<YoutubeInfo> {
         }
 
         await new Promise(resolve => setTimeout(resolve, 2000));
-        
+
         // ✅ Extract video description
         let description = await page.evaluate(() => {
             return document.querySelector("#description-inline-expander > yt-attributed-string > span > span:nth-child(1)")?.textContent?.trim() || "N/A";

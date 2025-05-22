@@ -50,6 +50,7 @@ export async function createContent(req: Request, res: Response){
       let result;
       let contentText = "N/A"; // Default content
 
+    //   console.log("Detected URL Type:", type);
       // Fetch content based on type
       switch (type) {
           case "youtube":
@@ -63,7 +64,7 @@ export async function createContent(req: Request, res: Response){
           default:
                 const requestBody = { url: link };
                 const response = await axios.post(
-                "https://mwn9p70n-5000.inc1.devtunnels.ms/process-url",
+                "https://web2md.shortsy.xyz/scrape",
                 requestBody,
                 { headers: { "Content-Type": "application/json" } }
                 );
@@ -94,7 +95,7 @@ export async function createContent(req: Request, res: Response){
       await content.create({
           link,
           type,
-          title: result.result.title || "",
+          title: result?.result?.title || "",
           content: contentText,
           embeddings: aggregatedEmbedding,
           userId: res.locals.jwtData,
